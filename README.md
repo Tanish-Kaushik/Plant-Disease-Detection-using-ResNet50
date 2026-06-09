@@ -60,6 +60,7 @@ Our goal is to democratize plant disease diagnosis using just a smartphone or a 
 
 ## 🏗️ System Architecture
 
+```mermaid
 graph LR
     A[Input Leaf Image] --> B[Preprocessing]
     B --> C{Resize & Normalize}
@@ -67,9 +68,7 @@ graph LR
     D --> E[ResNet50 Base Model]
     E --> F[Custom Classification Head]
     F --> G[Disease Prediction]
-
-
----
+```
 
 ## 📊 Dataset
 
