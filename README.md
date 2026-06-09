@@ -5,63 +5,56 @@
 [![ResNet50](https://img.shields.io/badge/Architecture-ResNet50-red.svg)](https://arxiv.org/abs/1512.03385)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-> **AI-powered system for early and accurate detection of plant diseases from leaf images using ResNet50 convolutional neural network**
+> **Early and accurate detection of plant diseases to prevent crop loss and improve agricultural productivity using AI & Computer Vision.**
 
 ---
 
-## 📋 Table of Contents
+## 📌 Table of Contents
+
 - [Overview](#-overview)
-- [Why This Matters](#-why-this-matters)
-- [Key Features](#-key-features)
+- [Motivation](#-motivation)
+- [Features](#-features)
 - [System Architecture](#-system-architecture)
 - [Dataset](#-dataset)
-- [Methodology](#-methodology)
-- [Installation](#-installation)
+- [Model: ResNet50 + Transfer Learning](#-model-resnet50--transfer-learning)
+- [Preprocessing & Augmentation](#-preprocessing--augmentation)
+- [Installation & Setup](#-installation--setup)
 - [Usage](#-usage)
 - [Results](#-results)
-- [Future Work](#-future-work)
+- [Future Scope](#-future-scope)
 - [Contributing](#-contributing)
 - [License](#-license)
+- [Acknowledgments](#-acknowledgments)
 
 ---
 
 ## 🌾 Overview
 
-Agriculture is the backbone of many economies and a critical pillar of global food security. However, plant diseases threaten crop quality and yield, leading to significant economic losses and reduced food production.
+Agriculture is the backbone of many economies, yet plant diseases cause **20–40% of global crop losses** annually. Traditional manual inspection by experts is slow, expensive, and often inaccessible to small-scale farmers.
 
-**Traditional methods** rely on manual expert inspection – which is:
-- ⏱️ Time-consuming
-- 💰 Costly
-- 📉 Often inaccurate when done by non-specialists
-
-**Our solution** leverages **Deep Learning** and **ResNet50 CNN architecture** to automatically identify and classify plant diseases from leaf images with high accuracy, speed, and reliability.
+This project presents an **AI-powered Plant Disease Detection System** using the **ResNet50** deep learning model. By simply uploading a leaf image, the system instantly classifies it as **healthy** or **diseased** and identifies the specific disease type. This tool empowers farmers and agricultural experts to take timely action, reducing losses and improving food security.
 
 ---
 
-## 🎯 Why This Matters
+## ❓ Motivation
 
-| Problem | Impact | Our Solution |
-|---------|--------|---------------|
-| Late disease detection | 20-40% crop loss | Early, real-time diagnosis |
-| Expert dependency | High costs & delays | Fully automated system |
-| Manual errors | Misdiagnosis | Consistent AI-powered classification |
-| Limited reach | Rural farmers left behind | Simple image upload interface |
+- 🧑‍🌾 **Smallholder farmers** lack access to plant pathologists.
+- ⏱️ Manual inspection is time-consuming and subjective.
+- 🦠 Delayed detection allows diseases to spread rapidly.
+- 🤖 **Deep learning** offers a fast, scalable, and accurate alternative.
 
-✅ **Fast** – Results in seconds  
-✅ **Reliable** – High accuracy using pre-trained ResNet50  
-✅ **Cost-effective** – No expert required  
-✅ **User-friendly** – Simple web/mobile interface  
+Our goal is to democratize plant disease diagnosis using just a smartphone or a camera.
 
 ---
 
-## ✨ Key Features
+## ✨ Features
 
-- 🔍 **Automatic Disease Detection** – Upload a leaf image, get instant diagnosis  
-- 🧠 **Deep Learning Powered** – ResNet50 with transfer learning  
-- 📸 **Supports Multiple Diseases** – Learns from color changes, spots, lesions & texture patterns  
-- 🌱 **Healthy vs. Diseased Classification** – Binary and multi-class support  
-- 📊 **Data Augmentation** – Improves generalization and robustness  
-- 🖥️ **Easy Integration** – REST API / Web interface ready  
+✅ **Automated Disease Classification** – Identifies diseases from leaf images.  
+✅ **ResNet50 Backbone** – Leverages a powerful pretrained CNN for high accuracy.  
+✅ **Transfer Learning** – Fine-tuned on plant leaf datasets for superior performance.  
+✅ **Data Augmentation** – Improves model generalization (rotation, flipping, zoom).  
+✅ **User-Friendly Interface** – Upload an image and get instant results.  
+✅ **Scalable** – Can be extended to more crops and diseases.
 
 ---
 
@@ -76,3 +69,62 @@ graph LR
     E --> F[Custom Classification Head]
     F --> G[Disease Prediction]
     G --> H[Output: Disease Name / Healthy]
+
+
+---
+
+## 📊 Dataset
+
+The model is trained on a comprehensive dataset of **plant leaf images** containing:
+
+- Healthy leaves
+- Leaves infected with various diseases (e.g., rust, blight, mildew, spots)
+
+> *Example public datasets used:*  
+> - [PlantVillage Dataset](https://www.kaggle.com/datasets/emmarex/plantdisease)  
+> - Custom collected images (if applicable)
+
+Each image is labeled and split into **training (80%)**, **validation (10%)**, and **testing (10%)** sets.
+
+---
+
+## 🤖 Model: ResNet50 + Transfer Learning
+
+**ResNet50** is a 50-layer deep CNN that introduced **residual connections**, allowing it to train very deep networks without vanishing gradients. We leverage:
+
+- **Pretrained weights** from ImageNet (1.4M images, 1000 classes).
+- **Transfer learning** – Replace the top classification layer with a new dense layer adapted to `N` plant disease classes.
+- **Fine-tuning** – Unfreeze the last few layers to learn disease-specific features.
+
+**Why ResNet50?**  
+- High accuracy on image classification benchmarks.  
+- Extracted features are generalizable (edges, textures, patterns).  
+- Faster convergence than training from scratch.
+
+---
+
+## 🛠️ Preprocessing & Augmentation
+
+| Step               | Description                                   |
+|--------------------|-----------------------------------------------|
+| **Resizing**       | All images resized to `224×224` pixels (ResNet50 input size). |
+| **Normalization**  | Pixel values scaled to `[0,1]` or standardized. |
+| **Data Augmentation** | Random rotations, width/height shifts, zoom, horizontal flip. |
+
+Augmentation helps prevent overfitting and makes the model robust to real-world leaf photos (different angles, lighting conditions).
+
+---
+
+## 💻 Installation & Setup
+
+### Prerequisites
+
+- Python 3.8+
+- pip / conda
+- (Optional) GPU with CUDA for faster training
+
+### Clone the Repository
+
+```bash
+git clone https://github.com/yourusername/plant-disease-detection.git
+cd plant-disease-detection
